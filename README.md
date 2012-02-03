@@ -1,6 +1,12 @@
 # cloudstack_helper
 cloudstack_helper is a simple ruby library that helps making request to CloudStack API easier. With cloudstack_helper, you only have to specify the command and the parameters for the request, and it will handle everything for you.
 
+## Installation
+It&apos;s hosted on rubygems.org
+
+    sudo gem install cloudstack_helper
+
+
 ## Library Usage
 
 ```ruby
