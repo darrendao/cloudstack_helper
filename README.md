@@ -16,7 +16,6 @@ cloudstack_helper is a simple ruby library that helps making request to CloudSta
 
      params[:response] = "json"
      puts cs_helper.get(params).body
-     ehelper.request :post, 'http://api.enstratus.com/api/enstratus/2011-02-24/admin/BillingCode', :data => json_data, :header => {'Accept' => 'application/json'}
 ```
 
 ## Executable Script Usage
