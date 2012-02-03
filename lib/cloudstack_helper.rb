@@ -27,7 +27,7 @@ class CloudStackHelper
   #    with the user’s Secret Key.  
   # 4. Base64 encode the resulting byte array in UTF-8 so that it can be safely transmitted via HTTP.  
   def generate_signature(params)
-    params.each { |k,v| params[k] = CGI.escape(v).gsub('+', '%20').downcase }
+    params.each { |k,v| params[k] = CGI.escape(v.to_s).gsub('+', '%20').downcase }
     sorted_params = params.sort_by{|key,value| key.to_s}
 
     data = parameterize(sorted_params, false)

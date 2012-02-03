@@ -4,6 +4,7 @@ cloudstack_helper is a simple ruby library that helps making request to CloudSta
 ## Library Usage
 
 ```ruby
+     require 'rubygems'
      require 'cloudstack_helper'
 
      API_URL = "http://mycloudstack:8080/client/api"
@@ -12,10 +13,17 @@ cloudstack_helper is a simple ruby library that helps making request to CloudSta
      cs_helper = CloudStackHelper.new(:api_key => API_KEY, :secret_key => SECRET_KEY, :api_url => API_URL)
 
      params = {:command => "listZones"}
-     puts cs_helper.get(params).body
+     result = cs_helper.get(params).body
+     puts result
 
      params[:response] = "json"
-     puts cs_helper.get(params).body
+     result = cs_helper.get(params).body
+     puts result
+
+     params.merge!({:command => 'deployVirtualMachine', :serviceofferingid => 12, :templateid => 4,  :zoneid => 1, :displayname => 'my shiny vm'})
+     result = cs_helper.get(params).body
+     puts result
+
 ```
 
 ## Script Usage
