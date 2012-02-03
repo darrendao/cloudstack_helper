@@ -37,6 +37,7 @@ cloudstack_helper is a simple ruby library that helps making request to CloudSta
 ####Configuration
 By default, if you don't specify a config file, cloudstack_rb assumes there is a config file in the current working directory under the name 'cloudstack.yml'
 The config file should look like this
+
 ```
     api_url: "http://mycloudstack:8080/client/api"
     api_key: "WiUVlx74PpVE8w7z7J7gtojiOQasdaFL3A054D_IPeSxxcm1PadgasdgujGSJBGiS2uBcG0GoLwLisosDCA"
