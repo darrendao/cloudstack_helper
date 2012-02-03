@@ -1,0 +1,46 @@
+#!/usr/bin/env ruby
+require 'optparse'
+require 'yaml'
+
+$:.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
+require 'cloudstack_helper'
+
+options = []
+command = nil
+conf_file = "cloudstack.yml"
+opts = OptionParser.new(nil, 24, '  ')
+opts.banner = 'Usage: cloudstack_rb -c conf -x command param1=value1 param2=value2'
+opts.on('-x', '--execute COMMAND', 'command to execute. See CloudStack API for list of commands.') do |opt|
+  command = opt
+end
+opts.on('-c', '--conf FILE', 'YAML config file that stores api and secret key') do |opt|
+  conf_file = opt
+end
+opts.on_tail('-h', '--help', 'Show this message.') do
+  puts opts
+  exit
+end
+
+params = opts.parse(ARGV)
+
+if ARGV.length == 0
+  puts opts
+  exit
+end
+
+# Read config file for key and api url
+unless File.exists?(conf_file)
+  abort("Unable to read config file")
+end
+conf = YAML.load(File.read(conf_file))
+
+cs_helper = CloudStackHelper.new(:api_key => conf['api_key'], :secret_key => conf['secret_key'], :api_url => conf['api_url'])
+
+params_hash= {:command => command}
+params.each do |param|
+  tokens = param.split("=")
+  next unless tokens.size == 2
+  params_hash[tokens[0]] = tokens[1]
+end
+
+puts cs_helper.get(params_hash).body
