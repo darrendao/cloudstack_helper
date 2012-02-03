@@ -41,4 +41,4 @@ The config file should look like this
     api_url: "http://mycloudstack:8080/client/api"
     api_key: "WiUVlx74PpVE8w7z7J7gtojiOQasdaFL3A054D_IPeSxxcm1PadgasdgujGSJBGiS2uBcG0GoLwLisosDCA"
     secret_key: "uqzgrfMXnYSVvUiasdgj0DgvtXBemILs_npqi90Ki0xigOKjagvQTtYg093EUrHSLZJEnI3lV1z9PrQmv2SxQ"
-````
+```
