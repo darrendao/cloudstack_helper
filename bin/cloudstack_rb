@@ -1,6 +1,8 @@
 #!/usr/bin/env ruby
 require 'optparse'
 require 'yaml'
+require 'json'
+require 'rexml/document'
 
 $:.unshift(File.join(File.dirname(__FILE__), '..', 'lib'))
 require 'cloudstack_helper'
@@ -8,13 +10,19 @@ require 'cloudstack_helper'
 options = []
 command = nil
 conf_file = "cloudstack.yml"
+pretty_print = false
+json_output = false
+
 opts = OptionParser.new(nil, 24, '  ')
 opts.banner = 'Usage: cloudstack_rb -c conf -x command param1=value1 param2=value2'
 opts.on('-x', '--execute COMMAND', 'command to execute. See CloudStack API for list of commands.') do |opt|
   command = opt
 end
-opts.on('-c', '--conf FILE', 'YAML config file that stores api and secret key') do |opt|
+opts.on('-c', '--conf FILE', 'YAML config file that stores api and secret key.') do |opt|
   conf_file = opt
+end
+opts.on('-p', '--pretty', 'Pretty print the response of the API call.') do |opt|
+  pretty_print = true
 end
 opts.on_tail('-h', '--help', 'Show this message.') do
   puts opts
@@ -43,4 +51,16 @@ params.each do |param|
   params_hash[tokens[0]] = tokens[1]
 end
 
-puts cs_helper.get(params_hash).body
+json_output = true if params_hash.key? "response" and params_hash["response"] == "json"
+if pretty_print
+  if json_output
+    puts JSON.pretty_generate(JSON.parse(cs_helper.get(params_hash).body))
+  else
+    xml_document = REXML::Document.new(cs_helper.get(params_hash).body)
+    xml_formatter = REXML::Formatters::Pretty.new(2)
+    xml_formatter.compact = true
+    xml_formatter.write(xml_document, $stdout)
+  end
+else
+  puts cs_helper.get(params_hash).body
+end
