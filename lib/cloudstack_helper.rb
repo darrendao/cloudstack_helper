@@ -33,7 +33,7 @@ class CloudStackHelper
     data = parameterize(sorted_params, false)
 
     hash = OpenSSL::HMAC.digest('sha1', @secret_key, data)
-    signature = Base64.b64encode(hash).chomp
+    signature = Base64.encode64(hash).chomp
   end
 
   def parameterize(params, escape=true)

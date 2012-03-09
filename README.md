@@ -36,7 +36,8 @@ It&apos;s hosted on rubygems.org
 ```
     Usage: cloudstack_rb -c conf -x command param1=value1 param2=value2
       -x, --execute COMMAND    command to execute. See CloudStack API for list of commands.
-      -c, --conf FILE          YAML config file that stores api and secret key
+      -c, --conf FILE          YAML config file that stores api and secret key.
+      -p, --pretty             Pretty print the response of the API call.
       -h, --help               Show this message.
 
 ```
@@ -45,6 +46,7 @@ It&apos;s hosted on rubygems.org
 ```
     cloudstack_rb -x listUsers domainid=1
     cloudstack_rb -x listUsers domainid=1 response=json
+    cloudstack_rb -x listUsers domainid=1 response=json -p
     cloudstack_rb -x deployVirtualMachine serviceofferingid=12 templateid=4 zoneid=1 displayname=ohyea
 ```
 
