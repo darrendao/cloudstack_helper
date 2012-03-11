@@ -4,7 +4,7 @@ $LOAD_PATH.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "cloudstack_helper"
-  s.version     = "0.4"
+  s.version     = "0.5"
   s.platform    = Gem::Platform::RUBY
   s.authors     = ["Darren Dao"]
   s.email       = ["darrendao@gmail.com"]
@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   s.description = %q{cloudstack_helper is a simple ruby library that helps making request to CloudStack API easier. With cloudstack_helper, you only have to specify the command the parameters for the request and it will handle everything for you.}
 
   s.add_runtime_dependency 'rest-client', '~> 1.6.7'
+  s.add_runtime_dependency 'json', '~> 1.6.5'
   s.add_development_dependency 'yard', '~> 0.7'
 
   s.files            = `git ls-files`.split("\n")
